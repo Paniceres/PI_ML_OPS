@@ -1,6 +1,5 @@
 # dataset
-/data
+/data/*.json
 
 # venv
-/PI_OPS
 /.venv
