@@ -1,73 +1,77 @@
 import pandas as pd
 from fastapi import APIRouter
+from memory_profiler import memory_usage 
+
 
 router = APIRouter()
 
-# It should return the amount of money spent by the user, the recommendation percentage based on reviews.recommend, and the number of items.
-@router.get("/userdata_slow/{user_id}")
-def userdata_slow(User_id : str):
-    # Read the dataframes
-    df_games = pd.read_parquet('/home/p/Code/Henry/PI_ML_OPS/data/steam_games.parquet', engine='pyarrow')
-    df_user_reviews = pd.read_parquet('/home/p/Code/Henry/PI_ML_OPS/data/user_reviews.parquet', engine='pyarrow')
-
-    # Filter the user reviews dataframe by the user_id
-    df_user = df_user_reviews[df_user_reviews['user_id'] == User_id]
-
-    # Join the user reviews with the games data
-    df_user_games = pd.merge(df_user, df_games, left_on='item_id', right_on='id', how='inner')
-
-    # Calculate the total number of items
-    total_items = df_user_games['item_id'].nunique()
-
-    # Calculate the percentage of recommendations
-    total_reviews = df_user_games.shape[0]
-    total_recommendations = df_user_games[df_user_games['recommend'] == True].shape[0]
-    recommendation_percentage = (total_recommendations / total_reviews) * 100
-
-    # Calculate the total amount of money spent by the user
-    total_money_spent = df_user_games['price'].sum()
-
-    return total_money_spent, recommendation_percentage, total_items
 
 # It should return the amount of money spent by the user, the recommendation percentage based on reviews.recommend, and the number of items.
 @router.get("/userdata/{user_id}")
 def userdata(User_id : str):
-    # Read the dataframes
-    df_games = pd.read_parquet('/home/p/Code/Henry/PI_ML_OPS/data/steam_games.parquet', engine='pyarrow')
-    df_user_reviews = pd.read_parquet('/home/p/Code/Henry/PI_ML_OPS/data/user_reviews.parquet', engine='pyarrow')
+    # Read only the necessary columns from the dataframes
+    df_games = pd.read_parquet('/home/p/Code/Henry/PI_ML_OPS/data/steam_games.parquet', columns=['price', 'id', 'app_name'], engine='pyarrow')
+    df_user_reviews = pd.read_parquet('/home/p/Code/Henry/PI_ML_OPS/data/user_reviews.parquet', columns=['user_id', 'item_id', 'recommend'], engine='pyarrow')
+    df_user_items = pd.read_parquet('/home/p/Code/Henry/PI_ML_OPS/data/user_items.parquet', columns=['user_id', 'item_id', 'item_name'], engine='pyarrow')
 
-    # Filter the user reviews dataframe by the user_id
-    df_user = df_user_reviews[df_user_reviews['user_id'] == User_id]
+    # Filter the dataframes by user_id
+    # df_user_reviews = df_user_reviews[df_user_reviews['user_id'] == User_id]
+    # df_user_items = df_user_items[df_user_items['user_id'] == User_id]
 
-    # Filter the games dataframe to include only the games the user has reviewed
+    # Merge df_user_reviews and df_user_items on 'item_id' and 'user_id'
+    df_user = pd.merge(df_user_reviews, df_user_items, on=['item_id', 'user_id'], how='inner')
+
+    # Filter df_games to include only the games the user has bought
     df_games = df_games[df_games['id'].isin(df_user['item_id'])]
 
-    # Join the user reviews with the games data
+    # Merge df_user and df_games on 'item_id_x' and 'id'
     df_user_games = pd.merge(df_user, df_games, left_on='item_id', right_on='id', how='inner')
+
+    # Delete the original dataframes to free up memory
+    del df_games, df_user_reviews, df_user_items, df_user
 
     # Calculate the total number of items
     total_items = df_user_games['item_id'].nunique()
 
-    # Calculate the total reviews and total recommendations
-    recommend_counts = df_user_games['recommend'].value_counts()
-    if len(recommend_counts) == 2:
-        total_reviews, total_recommendations = recommend_counts
-    else:
-        total_reviews = recommend_counts[0]
-        total_recommendations = 0 if df_user_games['recommend'].iloc[0] else total_reviews
-
-    # Calculate the percentage of recommendations
-    recommendation_percentage = (total_recommendations / total_reviews) * 100
-
     # Calculate the total amount of money spent by the user
     total_money_spent = df_user_games['price'].sum()
 
-    return total_money_spent, recommendation_percentage, total_items
+    # Calculate the total reviews and total recommendations
+    recommend_counts = df_user_games['recommend'].value_counts()
+    if recommend_counts.empty:
+        total_reviews = 0
+        total_recommendations = 0
+    else:
+        if len(recommend_counts) == 2:
+            total_reviews, total_recommendations = recommend_counts
+        else:
+            total_reviews = recommend_counts[0]
+            total_recommendations = 0 if df_user_games['recommend'].iloc[0] else total_reviews
 
+    # Calculate the percentage of recommendations
+    recommendation_percentage = (total_recommendations / total_reviews) * 100 if total_reviews else 0
 
+    # Return a dictionary
+    return {
+        "total_money_spent": total_money_spent,
+        "recommendation_percentage": recommendation_percentage,
+        "total_items": total_items
+    }
 
-# test
-# total_money_spent, recommendation_percentage, total_items = userdatav2('LydiaMorley')
+# # Start measuring memory usage
+# mem_usage_before = memory_usage(-1, interval=0.1, timeout=1)[0]
+# print(userdata('LydiaMorley'))
+# print(userdata('evcentric'))
+# print(userdata('Riot-Punch'))
+# print(userdata('Sp3ctre'))
+# # Call func
+# total_money_spent, recommendation_percentage, total_items = userdata('76561197970982479')
+
+# # End measuring memory usage
+# mem_usage_after = memory_usage(-1, interval=0.1, timeout=1)[0]
+
+# print(f"Memory used: {mem_usage_after - mem_usage_before} MB")
+
 # print(f"Total money spent: {total_money_spent}")
 # print(f"Recommendation percentage: {recommendation_percentage}")
 # print(f"Total items: {total_items}")

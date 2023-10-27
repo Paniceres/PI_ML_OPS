@@ -60,9 +60,16 @@ def most_played_user_by_genre(genre: str):
     df_user_genre['release_year'] = pd.to_datetime(df_user_genre['release_date']).dt.year
     playtime_per_year = df_user_genre.groupby('release_year')['playtime_forever'].sum()
 
-    return max_playtime_user, playtime_per_year, total_playtime
+    # Return a dictionary
+    return {
+        "max_playtime_user": max_playtime_user,
+        "playtime_per_year": playtime_per_year.to_dict(),
+        "total_playtime": total_playtime
+    }
 
 # test
+
+print(most_played_user_by_genre('Action'))
 # max_playtime_user, playtime_per_year, total_playtime = most_played_user_by_genre('Action')
 # print(f"User with maximum playtime: {max_playtime_user}")
 # print(f"Playtime per year: {playtime_per_year}")
