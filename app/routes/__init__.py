@@ -1,8 +1,9 @@
 from fastapi import APIRouter
-from .user_for_genre import most_played_user_by_genre, most_played_user_by_genre_slow
+from .user_for_genre import most_played_user_by_genre
 from .userdata import userdata
 from .best_developer_year import top_3_developers
-from .developer import developer, developerv2
+from .developer import developer
+from .developer_recommendations import developer_rec
 
 router = APIRouter()
 
@@ -24,4 +25,4 @@ def get_user_data(user_id: str):
 
 @router.get("/developer_rec/{developer}")
 def get_developer_rec(dev_name: str):
-    return get_developer_rec(dev_name)
+    return developer_rec(dev_name)

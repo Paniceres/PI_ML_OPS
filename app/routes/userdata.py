@@ -1,18 +1,20 @@
 import pandas as pd
 from fastapi import APIRouter
 from memory_profiler import memory_usage 
-
+import os 
 
 router = APIRouter()
 
+# Get the directory of the current script
+script_dir = os.path.dirname(os.path.realpath(__file__))
 
 # It should return the amount of money spent by the user, the recommendation percentage based on reviews.recommend, and the number of items.
 @router.get("/userdata/{user_id}")
 def userdata(User_id : str):
     # Read only the necessary columns from the dataframes
-    df_games = pd.read_parquet('/home/p/Code/Henry/PI_ML_OPS/data/steam_games.parquet', columns=['price', 'id', 'app_name'], engine='pyarrow')
-    df_user_reviews = pd.read_parquet('/home/p/Code/Henry/PI_ML_OPS/data/user_reviews.parquet', columns=['user_id', 'item_id', 'recommend'], engine='pyarrow')
-    df_user_items = pd.read_parquet('/home/p/Code/Henry/PI_ML_OPS/data/user_items.parquet', columns=['user_id', 'item_id', 'item_name'], engine='pyarrow')
+    df_games = pd.read_parquet(os.path.join(script_dir, '../../data/steam_games.parquet'), columns=['price', 'id', 'app_name'], engine='pyarrow')
+    df_user_reviews = pd.read_parquet(os.path.join(script_dir, '../../data/user_reviews.parquet'), columns=['user_id', 'item_id', 'recommend'], engine='pyarrow')
+    df_user_items = pd.read_parquet(os.path.join(script_dir, '../../data/user_items.parquet'), columns=['user_id', 'item_id', 'item_name'], engine='pyarrow')
 
     # Filter the dataframes by user_id
     # df_user_reviews = df_user_reviews[df_user_reviews['user_id'] == User_id]
@@ -53,23 +55,23 @@ def userdata(User_id : str):
 
     # Return a dictionary
     return {
-        "total_money_spent": total_money_spent,
+        "total_money_spent": int(total_money_spent),
         "recommendation_percentage": recommendation_percentage,
-        "total_items": total_items
+        "total_items": int(total_items)
     }
 
-# # Start measuring memory usage
-mem_usage_before = memory_usage(-1, interval=0.1, timeout=1)[0]
+# # # Start measuring memory usage
+# mem_usage_before = memory_usage(-1, interval=0.1, timeout=1)[0]
 
-# Call func
-# print(userdata('LydiaMorley'))
+# # # Call func
+# # # print(userdata('LydiaMorley'))
 # print(userdata('evcentric'))
-# print(userdata('Riot-Punch'))
-print(userdata('Sp3ctre'))
+# # # print(userdata('Riot-Punch'))
+# # print(userdata('Sp3ctre'))
 
 
-# # End measuring memory usage
-mem_usage_after = memory_usage(-1, interval=0.1, timeout=1)[0]
+# # # # End measuring memory usage
+# mem_usage_after = memory_usage(-1, interval=0.1, timeout=1)[0]
 
-print(f"Memory used: {mem_usage_after - mem_usage_before} MB")
+# print(f"Memory used: {mem_usage_after - mem_usage_before} MB")
 

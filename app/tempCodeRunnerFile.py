@@ -1,5 +1,5 @@
 import sys
-sys.path.insert(0, './app/routes')
+sys.path.insert(0, '/home/p/Code/Henry/PI_ML_OPS/app/routes')
 from fastapi import FastAPI
 from routes import router as routes_router
 
