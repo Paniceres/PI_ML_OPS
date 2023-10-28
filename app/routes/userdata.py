@@ -19,12 +19,12 @@ def userdata(User_id : str):
     # df_user_items = df_user_items[df_user_items['user_id'] == User_id]
 
     # Merge df_user_reviews and df_user_items on 'item_id' and 'user_id'
-    df_user = pd.merge(df_user_reviews, df_user_items, on=['item_id', 'user_id'], how='inner')
+    df_user = pd.merge(df_user_reviews, df_user_items, on=['item_id'], how='inner')
 
     # Filter df_games to include only the games the user has bought
     df_games = df_games[df_games['id'].isin(df_user['item_id'])]
 
-    # Merge df_user and df_games on 'item_id_x' and 'id'
+    # Merge df_user and df_games on 'item_id' and 'id'
     df_user_games = pd.merge(df_user, df_games, left_on='item_id', right_on='id', how='inner')
 
     # Delete the original dataframes to free up memory
@@ -59,19 +59,17 @@ def userdata(User_id : str):
     }
 
 # # Start measuring memory usage
-# mem_usage_before = memory_usage(-1, interval=0.1, timeout=1)[0]
+mem_usage_before = memory_usage(-1, interval=0.1, timeout=1)[0]
+
+# Call func
 # print(userdata('LydiaMorley'))
 # print(userdata('evcentric'))
 # print(userdata('Riot-Punch'))
-# print(userdata('Sp3ctre'))
-# # Call func
-# total_money_spent, recommendation_percentage, total_items = userdata('76561197970982479')
+print(userdata('Sp3ctre'))
+
 
 # # End measuring memory usage
-# mem_usage_after = memory_usage(-1, interval=0.1, timeout=1)[0]
+mem_usage_after = memory_usage(-1, interval=0.1, timeout=1)[0]
 
-# print(f"Memory used: {mem_usage_after - mem_usage_before} MB")
+print(f"Memory used: {mem_usage_after - mem_usage_before} MB")
 
-# print(f"Total money spent: {total_money_spent}")
-# print(f"Recommendation percentage: {recommendation_percentage}")
-# print(f"Total items: {total_items}")

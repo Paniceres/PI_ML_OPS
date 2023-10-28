@@ -26,3 +26,6 @@ def top_3_developers(year: str):
         top_3.append({f'Puesto {i+1}': top_developers.loc[i, 'developer']})
 
     return top_3
+
+
+print(top_3_developers('2012'))

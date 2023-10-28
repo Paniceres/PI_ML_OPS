@@ -22,5 +22,6 @@ def get_top_3_developers(year: str):
 def get_user_data(user_id: str):
     return userdata(user_id)
 
-
-
+@router.get("/developer_rec/{developer}")
+def get_developer_rec(dev_name: str):
+    return get_developer_rec(dev_name)
