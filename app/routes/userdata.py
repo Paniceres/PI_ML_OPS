@@ -1,6 +1,5 @@
 import pandas as pd
 from fastapi import APIRouter
-from memory_profiler import memory_usage 
 import os 
 
 router = APIRouter()
