@@ -7,35 +7,27 @@ from surprise import Reader
 from surprise.model_selection import train_test_split
 import pickle
 from fastapi import APIRouter
+import os
+
+
+
 
 router = APIRouter()
 
-# Load the user reviews and steam games data from a parquet file using the pyarrow engine
-df_user_reviews = pd.read_parquet('../../data/user_reviews.parquet', engine='pyarrow')
-df_games = pd.read_parquet('../../data/steam_games.parquet', engine='pyarrow')
-
-# Select only the desired columns
-df_reviews = df_user_reviews[['user_id', 'item_id', 'sentiment_score', 'recommend']]
-df_games = df_games[['id', 'app_name']]
-
-# Merge df_games and df_user_reviews
-df = df_reviews.merge(df_games, left_on='item_id', right_on='id', how='inner')
-
-# Selecting the columns to be used for the algorithm, dropping the following columns
-df.drop(['id', 'item_id', 'sentiment_score', 'recommend'], inplace=True, axis=1)
-
-# Create a new dataframe 'model' with only 'user_id', 'app_name', and 'rating'
-model = df[['user_id', 'app_name', 'rating']]
-
-# Load the trained model when the application starts
-with open("ML_model.pkl", 'rb') as model_file:
-    model = pickle.load(model_file)
-
-# Get a list of unique game names from the 'app_name' column of the dataframe
-games = df["app_name"].unique()
-
 @router.get("/recommend/{user_id}")
-async def recommend(user_id: str):
+def recommend(user_id: str):
+    # Get the absolute path to the 'data' directory
+    data_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../data'))
+    
+    # Load df_user_reviews, games, and model from their respective files in PI_ML_OPS/data
+    df_user_reviews = pd.read_parquet(os.path.join(data_dir, 'ML_df.parquet'))
+
+    # Load games from its file in PI_ML_OPS/data
+    games = pd.read_parquet(os.path.join(data_dir, 'ML_unique_games.parquet'))['game'].tolist()
+
+    # Load the trained model from pickle file
+    with open(os.path.join(data_dir, "ML_model.pkl"), 'rb') as model_file:
+        model = pickle.load(model_file) 
     # Get the list of games played by the user
     played_games = df_user_reviews[df_user_reviews['user_id'] == user_id]['app_name'].unique()
 
@@ -56,3 +48,6 @@ async def recommend(user_id: str):
         games_dict[f'game {i}'] = rec.iid
 
     return games_dict
+
+
+# print(recommend('doctr'))
