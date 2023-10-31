@@ -1,0 +1,19 @@
+Test inputs for the API
+
+Genres
+ Zombies
+ Action
+ FPS
+ 4X
+
+Users
+ Riot-Punch
+ evcentric
+ 76561198326700687
+ doctr
+
+Developers
+ Sacada
+ Valve
+ Laush Studio
+ Activision

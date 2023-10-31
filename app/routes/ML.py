@@ -9,9 +9,6 @@ import pickle
 from fastapi import APIRouter
 import os
 
-
-
-
 router = APIRouter()
 
 @router.get("/recommend/{user_id}")
@@ -50,4 +47,4 @@ def recommend(user_id: str):
     return games_dict
 
 
-# print(recommend('doctr'))
+# print(recommend('evcentric'))
