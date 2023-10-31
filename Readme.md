@@ -1,13 +1,7 @@
 <a name="Steam Project"></a>
 
 <!-- PROJECT SHIELDS -->
-<!--
-*** I'm using markdown "reference style" links for readability.
-*** Reference links are enclosed in brackets [ ] instead of parentheses ( ).
-*** See the bottom of this document for the declaration of the reference variables
-*** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
-*** https://www.markdownguide.org/basic-syntax/#reference-style-links
--->
+
 [![Contributors][contributors-shield]][contributors-url]
 [![Forks][forks-shield]][forks-url]
 [![Stargazers][stars-shield]][stars-url]
@@ -189,8 +183,7 @@ This is an example of how to list things you need to use the software and how to
 
 * Test and validate the recommendation system using appropriate evaluation metrics to measure its accuracy and usefulness.
 
-Expected Outcomes
-----------------
+## Expected Outcomes
 
 * A personalized game recommendation system for each Steam user based on their behavior and preferences.
 * Improved user experience on the Steam platform through better game recommendations.
@@ -258,4 +251,3 @@ Project Link: [https://github.com/Paniceres/PI_ML_OPS](https://github.com/Panice
 [Render-url]: https://render.com/
 [Manjaro-logo]: https://img.shields.io/badge/Manjaro-35BF5C?style=for-the-badge&logo=manjaro&logoColor=white
 [Manjaro-url]: https://manjaro.org/
-=====================================================
