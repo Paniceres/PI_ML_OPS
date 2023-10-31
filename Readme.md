@@ -20,7 +20,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/Paniceres/PI_ML_OPS">
-    <img src="/src/steam_project_logo.png" alt="Logo" width="300" height="300">
+    <img src="/src/steam_project_logo.png" alt="Logo" width="575" height="380">
   </a>
 
 <h3 align="center">Steam Project</h3>
@@ -127,7 +127,7 @@ This is an example of how to list things you need to use the software and how to
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-<img src="/src/fastapi_localhost.png" alt="FastAPI Localhost" width="300" height="300">
+<img src="/src/fastapi_localhost.png" alt="FastAPI Localhost" width="800" height="334">
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
