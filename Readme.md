@@ -1,151 +1,264 @@
-<p align=center><img src=https://d31uz8lwfmyn8g.cloudfront.net/Assets/logo-henry-white-lg.png><p>
+<a name="Steam Project"></a>
 
-# <h1 align=center> **PROYECTO INDIVIDUAL Nº1** </h1>
-
-# <h1 align=center>**`Machine Learning Operations (MLOps)`**</h1>
-
-<p align="center">
-<img src="https://user-images.githubusercontent.com/67664604/217914153-1eb00e25-ac08-4dfa-aaf8-53c09038f082.png"  height=300>
-</p>
-
-¡Bienvenidos al primer proyecto individual de la etapa de labs! En esta ocasión, deberán hacer un trabajo situándose en el rol de un ***MLOps Engineer***.  
-
-<hr>  
-
-## **Descripción del problema (Contexto y rol a desarrollar)**
-
-## Contexto
-
-Tienes tu modelo de recomendación dando unas buenas métricas :smirk:, y ahora, cómo lo llevas al mundo real? :eyes:
-
-El ciclo de vida de un proyecto de Machine Learning debe contemplar desde el tratamiento y recolección de los datos (Data Engineer stuff) hasta el entrenamiento y mantenimiento del modelo de ML según llegan nuevos datos.
-
-
-## Rol a desarrollar
-
-Empezaste a trabajar como **`Data Scientist`** en Steam, una plataforma multinacional de videojuegos. El mundo es bello y vas a crear tu primer modelo de ML que soluciona un problema de negocio: Steam pide que te encargues de crear un sistema de recomendación de videojuegos para usuarios. :worried:
-
-Vas a sus datos y te das cuenta que la madurez de los mismos es poca (ok, es nula :sob: ): Datos anidados, de tipo raw, no hay procesos automatizados para la actualización de nuevos productos, entre otras cosas… haciendo tu trabajo imposible :weary: . 
-
-Debes empezar desde 0, haciendo un trabajo rápido de **`Data Engineer`** y tener un **`MVP`** (_Minimum Viable Product_) para el cierre del proyecto! Tu cabeza va a explotar 🤯, pero al menos sabes cual es, conceptualmente, el camino que debes de seguir :exclamation:. Así que espantas los miedos y pones manos a la obra :muscle:
-
-<p align="center">
-<img src="https://github.com/HX-PRomero/PI_ML_OPS/raw/main/src/DiagramaConceptualDelFlujoDeProcesos.png"  height=500>
-</p>
-
-<sub> Nota que aquí se reflejan procesos, no herramientas tecnológicas. Haz el ejercicio de entender qué herramienta del stack corresponde a cada parte del proceso<sub/>
-
-## **Propuesta de trabajo (requerimientos de aprobación)**
-
-**`Transformaciones`**:  Para este MVP no se te pide transformaciones de datos(` aunque encuentres una motivo para hacerlo `) pero trabajaremos en leer el dataset con el formato correcto. Puedes eliminar las columnas que no necesitan para responder las consultas o preparar los modelos de aprendizaje automático, y de esa manera optimizar el rendimiento de la API y el entrenamiento del modelo.
-
-**`Feature Engineering`**:  En el dataset *user_reviews* se incluyen reseñas de juegos hechos por distintos usuarios. Debes crear la columna ***'sentiment_analysis'*** aplicando análisis de sentimiento con NLP con la siguiente escala: debe tomar el valor '0' si es malo, '1' si es neutral y '2' si es positivo. Esta nueva columna debe reemplazar la de user_reviews.review para facilitar el trabajo de los modelos de machine learning y el análisis de datos. De no ser posible este análisis por estar ausente la reseña escrita, debe tomar el valor de `1`.
-
-**`Desarrollo API`**:   Propones disponibilizar los datos de la empresa usando el framework ***FastAPI***. Las consultas que propones son las siguientes:
-
-<sub> Debes crear las siguientes funciones para los endpoints que se consumirán en la API, recuerden que deben tener un decorador por cada una (@app.get(‘/’)).<sub/>
-
-
-+ def **developer( *`desarrollador` : str* )**:
-    `Cantidad` de items y `porcentaje` de contenido Free por año según empresa desarrolladora. 
-Ejemplo de retorno:
-
-| Año  | Cantidad de Items | Contenido Free  |
-|------|-------------------|------------------|
-| 2023 | 50                | 27%              |
-| 2022 | 45                | 25%              |
-| xxxx | xx                | xx%              |
-
-
-+ def **userdata( *`User_id` : str* )**:
-    Debe devolver `cantidad` de dinero gastado por el usuario, el `porcentaje` de recomendación en base a reviews.recommend y `cantidad de items`.
-
-Ejemplo de retorno: {"Usuario X" : us213ndjss09sdf, "Dinero gastado": 200 USD, "% de recomendación": 20%, "cantidad de items": 5}
-
-+ def **UserForGenre( *`genero` : str* )**:
-    Debe devolver el usuario que acumula más horas jugadas para el género dado y una lista de la acumulación de horas jugadas por año.
-
-Ejemplo de retorno: {"Usuario con más horas jugadas para Género X" : us213ndjss09sdf,
-			     "Horas jugadas":[{Año: 2013, Horas: 203}, {Año: 2012, Horas: 100}, {Año: 2011, Horas: 23}]}
-	
-+ def **best_developer_year( *`año` : int* )**:
-   Devuelve el top 3 de desarrolladores con juegos MÁS recomendados por usuarios para el año dado. (reviews.recommend = True y comentarios positivos)
-  
-Ejemplo de retorno: [{"Puesto 1" : X}, {"Puesto 2" : Y},{"Puesto 3" : Z}]
-
-+ def **developer( *`desarrolladora` : str* )**:
-    Según el desarrollador, se devuelve un diccionario con el nombre del desarrollador como llave y una lista con la cantidad total 
-    de registros de reseñas de usuarios que se encuentren categorizados con un análisis de sentimiento como valor positivo o negativo. 
-
-Ejemplo de retorno: {'Valve' : [Negative = 182, Positive = 278]}
-
-<br/>
-
-> `Importante`<br>
-El MVP _tiene_ que ser una API que pueda ser consumida segun los criterios de [API REST o RESTful](https://rockcontent.com/es/blog/api-rest/) desde cualquier dispositivo conectado a internet. Algunas herramientas como por ejemplo, Streamlit, si bien pueden brindar una interfaz de consulta, no cumplen con las condiciones para ser consideradas una API, sin workarounds.
-
-
-**`Deployment`**: Conoces sobre [Render](https://render.com/docs/free#free-web-services) y tienes un [tutorial de Render](https://github.com/HX-FNegrete/render-fastapi-tutorial) que te hace la vida mas fácil :smile: . También podrías usar [Railway](https://railway.app/), o cualquier otro servicio que permita que la API pueda ser consumida desde la web.
-
-<br/>
-
-**`Análisis exploratorio de los datos`**: _(Exploratory Data Analysis-EDA)_
-
-Ya los datos están limpios, ahora es tiempo de investigar las relaciones que hay entre las variables del dataset, ver si hay outliers o anomalías (que no tienen que ser errores necesariamente :eyes: ), y ver si hay algún patrón interesante que valga la pena explorar en un análisis posterior. Las nubes de palabras dan una buena idea de cuáles palabras son más frecuentes en los títulos, ¡podría ayudar al sistema de predicción! En esta ocasión vamos a pedirte que no uses librerías para hacer EDA automático ya que queremos que pongas en práctica los conceptos y tareas involucrados en el mismo. Puedes leer un poco más sobre EDA en [este articulo](https://medium.com/swlh/introduction-to-exploratory-data-analysis-eda-d83424e47151)
-
-**`Modelo de aprendizaje automático`**: 
-
-Una vez que toda la data es consumible por la API, está lista para consumir por los departamentos de Analytics y Machine Learning, y nuestro EDA nos permite entender bien los datos a los que tenemos acceso, es hora de entrenar nuestro modelo de machine learning para armar un **sistema de recomendación**. Para ello, te ofrecen dos propuestas de trabajo: En la primera, el modelo deberá tener una relación ítem-ítem, esto es se toma un item, en base a que tan similar esa ese ítem al resto, se recomiendan similares. Aquí el input es un juego y el output es una lista de juegos recomendados, para ello recomendamos aplicar la *similitud del coseno*. 
-La otra propuesta para el sistema de recomendación debe aplicar el filtro user-item, esto es tomar un usuario, se encuentran usuarios similares y se recomiendan ítems que a esos usuarios similares les gustaron. En este caso el input es un usuario y el output es una lista de juegos que se le recomienda a ese usuario, en general se explican como “A usuarios que son similares a tí también les gustó…”. 
-Deben crear al menos **uno** de los dos sistemas de recomendación (Si se atreven a tomar el desafío, para mostrar su capacidad al equipo, ¡pueden hacer ambos!). Tu líder pide que el modelo derive obligatoriamente en un GET/POST en la API símil al siguiente formato:
-
-Si es un sistema de recomendación item-item:
-+ def **recomendacion_juego( *`id de producto`* )**:
-    Ingresando el id de producto, deberíamos recibir una lista con 5 juegos recomendados similares al ingresado.
-
-Si es un sistema de recomendación user-item:
-+ def **recomendacion_usuario( *`id de usuario`* )**:
-    Ingresando el id de un usuario, deberíamos recibir una lista con 5 juegos recomendados para dicho usuario.
-
-
-**`Video`**: Necesitas que al equipo le quede claro que tus herramientas funcionan realmente! Haces un video mostrando el resultado de las consultas propuestas y de tu modelo de ML entrenado! Recuerda presentarte, contar muy brevemente de que trata el proyecto y lo que vas a estar mostrando en el video.
-Para grabarlo, puedes usar la herramienta Zoom, haciendo una videollamada y grabando la pantalla, aunque seguramente buscando, encuentres muchas formas más. 😉
-
-<sub> **Spoiler**: El video NO DEBE durar mas de ***7 minutos*** y DEBE mostrar las consultas requeridas en funcionamiento desde la API y una breve explicación del modelo utilizado para el sistema de recomendación. En caso de que te sobre tiempo luego de grabarlo, puedes mostrar/explicar tu EDA, ETL e incluso cómo desarrollaste la API. <sub/>
-
-<br/>
-
-## **Criterios de evaluación**
-
-**`Código`**: Prolijidad de código, uso de clases y/o funciones, en caso de ser necesario, código comentado. Se tendrá en cuenta el trato de los valores str como `COUNter-strike` / `COUNTER-STRIKE` / `counter-strike`.
-
-**`Repositorio`**: Nombres de archivo adecuados, uso de carpetas para ordenar los archivos, README.md presentando el proyecto y el trabajo realizado. Recuerda que este último corresponde a la guía de tu proyecto, no importa que tan corto/largo sea siempre y cuando tu 'yo' + 1.5 AÑOS pueda entenderlo con facilidad. 
-
-**`Cumplimiento`** de los requerimientos de aprobación indicados en el apartado `Propuesta de trabajo`
-
-NOTA: Recuerde entregar el link de acceso al video. Puede alojarse en YouTube, Drive o cualquier plataforma de almacenamiento. **Verificar que sea de acceso público, recomendamos usar modo incógnito en tu navegador para confirmarlo**.
-
-<br/>
-Aquí te sintetizamos que es lo que consideramos un MVP aprobatorio, y la diferencia con un producto completo.
+<!-- PROJECT SHIELDS -->
+<!--
+*** I'm using markdown "reference style" links for readability.
+*** Reference links are enclosed in brackets [ ] instead of parentheses ( ).
+*** See the bottom of this document for the declaration of the reference variables
+*** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
+*** https://www.markdownguide.org/basic-syntax/#reference-style-links
+-->
+[![Contributors][contributors-shield]][contributors-url]
+[![Forks][forks-shield]][forks-url]
+[![Stargazers][stars-shield]][stars-url]
+[![Issues][issues-shield]][issues-url]
+[![MIT License][license-shield]][license-url]
+[![LinkedIn][linkedin-shield]][linkedin-url]
 
 
 
-<p align="center">
-<img src="https://github.com/HX-PRomero/PI_ML_OPS/raw/main/src/MVP_MLops.PNG"  height=250>
-</p>
+<!-- PROJECT LOGO -->
+<br />
+<div align="center">
+  <a href="https://github.com/Paniceres/PI_ML_OPS">
+    <img src="/src/steam_project_logo.png" alt="Logo" width="80" height="80">
+  </a>
+
+<h3 align="center">Steam Project</h3>
+
+  <p align="center">
+    Machine Learning and Data Engineering
+    <br />
+    <a href="https://github.com/Paniceres/PI_ML_OPS"><strong>Explore the docs »</strong></a>
+    <br />
+    <br />
+    <a href="https://github.com/Paniceres/PI_ML_OPS">View Demo</a>
+    ·
+    <a href="https://github.com/Paniceres/PI_ML_OPS/issues">Report Bug</a>
+    ·
+    <a href="https://github.com/Paniceres/PI_ML_OPS/issues">Request Feature</a>
+  </p>
+</div>
 
 
-## **Fuente de datos**
 
-+ [Dataset](https://drive.google.com/drive/folders/1HqBG2-sUkz_R3h1dZU5F2uAzpRn7BSpj): Carpeta con el archivo que requieren ser procesados, tengan en cuenta que hay datos que estan anidados (un diccionario o una lista como valores en la fila).
-+ [Diccionario de datos](https://docs.google.com/spreadsheets/d/1-t9HLzLHIGXvliq56UE_gMaWBVTPfrlTf2D9uAtLGrk/edit?usp=drive_link): Diccionario con algunas descripciones de las columnas disponibles en el dataset.
-<br/>
+<!-- TABLE OF CONTENTS -->
+<details>
+  <summary>Table of Contents</summary>
+  <ol>
+    <li>
+      <a href="#about-the-project">About The Project</a>
+      <ul>
+        <li><a href="#built-with">Built With</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#getting-started">Getting Started</a>
+      <ul>
+        <li><a href="#prerequisites">Prerequisites</a></li>
+        <li><a href="#installation">Installation</a></li>
+      </ul>
+    </li>
+    <li><a href="#usage">Usage</a></li>
+    <li><a href="#methodology">Methodology</a></li>
+    <li><a href="#contributing">Contributing</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ol>
+</details>
 
-## **Material de apoyo**
-
-En este mismo repositorio podrás encontrar algunos (hay repositorios con distintos sistemas de recomendación) [links de ayuda](https://github.com/HX-PRomero/PI_ML_OPS/raw/main/Material%20de%20apoyo.md). Recuerda que no son los unicos recursos que puedes utilizar!
 
 
+<!-- ABOUT THE PROJECT -->
+## About The Project
 
-  
-<br/>
+[![Product Name Screen Shot][product-screenshot]](https://example.com)
+Steam, a leading PC game distribution platform, has room for improvement in its recommendation system. This project aims to enhance the user experience by developing an effective and personalized game recommendation system using data analysis and machine learning techniques. The goal is to provide more relevant game suggestions, improve user satisfaction, increase engagement, and ultimately drive Steam's sales and revenue.
+
+Here's a blank template to get started: To avoid retyping too much info. Do a search and replace with your text editor for the following: `github_username`, `repo_name`, `twitter_handle`, `linkedin_username`, `email_client`, `email`, `project_title`, `project_description`
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+
+### Built With
+
+* [![Pandas][Pandas-logo]][Pandas-url]
+* [![Python][Python-logo]][Python-url]
+* [![Scikit-Surprise][Scikit-Surprise-logo]][Scikit-Surprise-url]
+* [![PyArrow][PyArrow-logo]][PyArrow-url]
+* [![FastAPI][FastAPI-logo]][FastAPI-url]
+* [![Render][Render-logo]][Render-url]
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+
+<!-- GETTING STARTED -->
+## Getting Started
+
+This is an example of how you may give instructions on setting up your project locally.
+To get a local copy up and running follow these simple example steps.
+
+### Prerequisites
+
+This is an example of how to list things you need to use the software and how to install them.
+* pip
+  ```sh
+  pip install requirements.txt
+  ```
+
+### Installation
+
+1. Clone the repo
+   ```sh
+   git clone https://github.com/Paniceres/PI_ML_OPS.git
+   ```
+2. Execute main.py
+   ```sh
+   python PI_ML_OPS/app/main.py
+   ```
+3. Enter your API in `localhost`
+   ```
+   https://localhost:8000
+   ```
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+
+<!-- USAGE EXAMPLES -->
+## Usage
+
+Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
+
+add photo
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+
+<!-- METHODOLOGY -->
+
+## Methodology
+
+### Data Collection
+
+* Large sets of data were collected from Steam, including user information, game data, reviews, and recommendations.
+* APIs and scraping tools were used to collect the data.
+
+### Data Cleaning
+
+* Once the data was collected, it was cleaned to remove any unwanted or redundant information.
+* This included removing duplicate data, correcting errors, and removing data from users who did not meet the project's requirements.
+
+### Data Transformation
+
+* In this step, the data was transformed to make it easier to work with and analyze.
+* This included converting data types, normalizing the data, and creating new variables from existing ones.
+
+### Data Loading
+
+* Once the data was ready, it was loaded into a destination dataset, such as a parquet file with gzip encryption.
+
+### Data Exploration
+
+* In this step, the data was explored to better understand the patterns and trends in user behavior.
+* Data visualization tools and mining techniques were used to identify correlations and patterns in the data.
+
+### Feature Engineering
+
+* In this step, new variables were created from existing ones to improve the accuracy of the model.
+* This included creating variables for user interactions with games, and game popularity and developers statistics.
+
+### Modeling
+
+* In this step, machine learning techniques were used to develop a model that could predict the probability of a user playing a particular game.
+* Supervised learning algorithms, such as logistic regression and cosine similarity, were used to develop the model.
+
+### Model Evaluation
+
+* Once the model was developed, its accuracy was evaluated using appropriate evaluation metrics, such as precision, recall, and F1-score.
+* Cross-validation techniques were used to ensure that the model would generalize well to new data.
+
+### Model Deployment
+
+* Finally, the model was deployed in a production environment where it could be used to make predictions in real-time.
+* A microservices architecture was used to deploy the model in a scalable and efficient manner.
+
+
+### Recommendation System Development
+
+* Develop a system that can analyze Steam data and provide personalized game recommendations for each user based on their behavior and preferences.
+
+### Testing and Validation
+
+* Test and validate the recommendation system using appropriate evaluation metrics to measure its accuracy and usefulness.
+
+Expected Outcomes
+----------------
+
+* A personalized game recommendation system for each Steam user based on their behavior and preferences.
+* Improved user experience on the Steam platform through better game recommendations.
+* Increased user satisfaction and engagement with the platform.
+* Improved efficiency in the game recommendation process, leading to increased sales and revenue for Steam.
+
+
+See the [open issues](https://github.com/Paniceres/PI_ML_OPS/issues) for a full list of proposed features (and known issues).
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+
+<!-- CONTRIBUTING -->
+## Contributing
+
+Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+
+If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
+Don't forget to give the project a star! Thanks again!
+
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+<!-- CONTACT -->
+## Contact
+
+Your Name - [@twitter_handle](https://twitter.com/twitter_handle) - email@email_client.com
+
+Project Link: [https://github.com/github_username/repo_name](https://github.com/github_username/repo_name)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- MARKDOWN LINKS & IMAGES -->
+<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+[contributors-shield]: https://img.shields.io/github/contributors/Paniceres/PI_OPS_ML.svg?style=for-the-badge
+[contributors-url]: https://github.com/Paniceres/PI_OPS_ML/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/Paniceres/PI_OPS_ML.svg?style=for-the-badge
+[forks-url]: https://github.com/Paniceres/PI_OPS_ML/network/members
+[stars-shield]: https://img.shields.io/github/stars/Paniceres/PI_OPS_ML.svg?style=for-the-badge
+[stars-url]: https://github.com/Paniceres/PI_OPS_ML/stargazers
+[issues-shield]: https://img.shields.io/github/issues/Paniceres/PI_OPS_ML.svg?style=for-the-badge
+[issues-url]: https://github.com/Paniceres/PI_OPS_ML/issues
+[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
+[linkedin-url]: https://www.linkedin.com/in/paniceres-lucio/
+[product-screenshot]: src/screenshot.png
+
+[Pandas-logo]: https://img.shields.io/badge/Pandas-150458?style=for-the-badge&logo=pandas&logoColor=white
+[Pandas-url]: https://pandas.pydata.org/
+[Python-logo]: https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white
+[Python-url]: https://www.python.org/
+[SciKit-Surprise-logo]: https://img.shields.io/badge/Scikit--Surprise-F7931E?style=for-the-badge&logo=scikit--learn&logoColor=white
+[SciKit-Surprise-url]: https://surprise.readthedocs.io/
+[PyArrow-logo]: https://img.shields.io/badge/PyArrow-F63E02?style=for-the-badge&logo=apache-arrow&logoColor=white
+[PyArrow-url]: https://arrow.apache.org/pyarrow/
+[FastAPI-logo]: https://img.shields.io/badge/FastAPI-009688?style=for-the-badge&logo=fastapi&logoColor=white
+[FastAPI-url]: https://fastapi.tiangolo.com/
+[Render-logo]: https://img.shields.io/badge/Render-FF6C37?style=for-the-badge&logo=render&logoColor=white
+[Render-url]: https://render.com/
+=====================================================

@@ -12,9 +12,6 @@ def read_root():
     return {"Hello": "World"}
 
 
-# make pydantic models
-# make some exceptions handlers
-
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run(app, host="0.0.0.0", port=8000)

@@ -4,7 +4,7 @@ from .userdata import userdata
 from .best_developer_year import top_3_developers
 from .developer import developer
 from .developer_recommendations import developer_rec
-
+from .ML import recommend
 router = APIRouter()
 
 @router.get("/most_played_user_by_genre/{genre}")
@@ -26,3 +26,7 @@ def get_user_data(user_id: str):
 @router.get("/developer_rec/{developer}")
 def get_developer_rec(dev_name: str):
     return developer_rec(dev_name)
+
+@router.get("/recommend/{user_id}")
+async def get_recommend(user_id: str):
+    return recommend(user_id)

@@ -59,18 +59,6 @@ def userdata(User_id : str):
         "total_items": int(total_items)
     }
 
-# # # Start measuring memory usage
-# mem_usage_before = memory_usage(-1, interval=0.1, timeout=1)[0]
 
-# # # Call func
-# # # print(userdata('LydiaMorley'))
+# print(userdata('LydiaMorley'))
 # print(userdata('evcentric'))
-# # # print(userdata('Riot-Punch'))
-# # print(userdata('Sp3ctre'))
-
-
-# # # # End measuring memory usage
-# mem_usage_after = memory_usage(-1, interval=0.1, timeout=1)[0]
-
-# print(f"Memory used: {mem_usage_after - mem_usage_before} MB")
-

@@ -41,4 +41,4 @@ def top_3_developers(year: str):
 
     return top_3
 
-print(top_3_developers('2018'))
+# print(top_3_developers('2018'))
