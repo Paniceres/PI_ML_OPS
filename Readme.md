@@ -20,7 +20,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/Paniceres/PI_ML_OPS">
-    <img src="/src/steam_project_logo.png" alt="Logo" width="80" height="80">
+    <img src="/src/steam_project_logo.png" alt="Logo" width="300" height="300">
   </a>
 
 <h3 align="center">Steam Project</h3>
@@ -73,8 +73,6 @@
 [![Product Name Screen Shot][product-screenshot]](https://example.com)
 Steam, a leading PC game distribution platform, has room for improvement in its recommendation system. This project aims to enhance the user experience by developing an effective and personalized game recommendation system using data analysis and machine learning techniques. The goal is to provide more relevant game suggestions, improve user satisfaction, increase engagement, and ultimately drive Steam's sales and revenue.
 
-Here's a blank template to get started: To avoid retyping too much info. Do a search and replace with your text editor for the following: `github_username`, `repo_name`, `twitter_handle`, `linkedin_username`, `email_client`, `email`, `project_title`, `project_description`
-
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
@@ -87,6 +85,7 @@ Here's a blank template to get started: To avoid retyping too much info. Do a se
 * [![PyArrow][PyArrow-logo]][PyArrow-url]
 * [![FastAPI][FastAPI-logo]][FastAPI-url]
 * [![Render][Render-logo]][Render-url]
+* [![Manjaro][Manjaro-logo][Manjaro-url]]
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -128,9 +127,7 @@ This is an example of how to list things you need to use the software and how to
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
-
-add photo
+<img src="/src/fastapi_localhost.png" alt="FastAPI Localhost" width="300" height="300">
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -228,9 +225,9 @@ Don't forget to give the project a star! Thanks again!
 <!-- CONTACT -->
 ## Contact
 
-Your Name - [@twitter_handle](https://twitter.com/twitter_handle) - email@email_client.com
+Paniceres Lucio - panicereslucio@gmail.com
 
-Project Link: [https://github.com/github_username/repo_name](https://github.com/github_username/repo_name)
+Project Link: [https://github.com/Paniceres/PI_ML_OPS](https://github.com/Paniceres/PI_ML_OPS)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -260,4 +257,6 @@ Project Link: [https://github.com/github_username/repo_name](https://github.com/
 [FastAPI-url]: https://fastapi.tiangolo.com/
 [Render-logo]: https://img.shields.io/badge/Render-FF6C37?style=for-the-badge&logo=render&logoColor=white
 [Render-url]: https://render.com/
+[Manjaro-logo]: https://manjaro.org/images/logo.svg
+[Manjaro-url]: https://manjaro.org/
 =====================================================

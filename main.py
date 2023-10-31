@@ -1,5 +1,5 @@
 import sys
-sys.path.insert(0, './app/routes')
+sys.path.insert(0, '.')
 from fastapi import FastAPI
 from app.routes import router as routes_router
 
@@ -10,10 +10,6 @@ app.include_router(routes_router)
 @app.get("/")
 def read_root():
     return {"Hello": "World"}
-
-
-# make pydantic models
-# make some exceptions handlers
 
 if __name__ == "__main__":
     import uvicorn
