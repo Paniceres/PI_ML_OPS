@@ -70,7 +70,6 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
 Steam, a leading PC game distribution platform, has room for improvement in its recommendation system. This project aims to enhance the user experience by developing an effective and personalized game recommendation system using data analysis and machine learning techniques. The goal is to provide more relevant game suggestions, improve user satisfaction, increase engagement, and ultimately drive Steam's sales and revenue.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -233,17 +232,17 @@ Project Link: [https://github.com/Paniceres/PI_ML_OPS](https://github.com/Panice
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/Paniceres/PI_OPS_ML.svg?style=for-the-badge
-[contributors-url]: https://github.com/Paniceres/PI_OPS_ML/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/Paniceres/PI_OPS_ML.svg?style=for-the-badge
-[forks-url]: https://github.com/Paniceres/PI_OPS_ML/network/members
-[stars-shield]: https://img.shields.io/github/stars/Paniceres/PI_OPS_ML.svg?style=for-the-badge
-[stars-url]: https://github.com/Paniceres/PI_OPS_ML/stargazers
-[issues-shield]: https://img.shields.io/github/issues/Paniceres/PI_OPS_ML.svg?style=for-the-badge
-[issues-url]: https://github.com/Paniceres/PI_OPS_ML/issues
+[contributors-shield]: https://img.shields.io/github/contributors/Paniceres/PI_ML_OPS.svg?style=for-the-badge
+[contributors-url]: https://github.com/Paniceres/PI_ML_OPS/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/Paniceres/PI_ML_OPS.svg?style=for-the-badge
+[forks-url]: https://github.com/Paniceres/PI_ML_OPS/network/members
+[stars-shield]: https://img.shields.io/github/stars/Paniceres/PI_ML_OPS.svg?style=for-the-badge
+[stars-url]: https://github.com/Paniceres/PI_ML_OPS/stargazers
+[issues-shield]: https://img.shields.io/github/issues/Paniceres/PI_ML_OPS.svg?style=for-the-badge
+[issues-url]: https://github.com/Paniceres/PI_ML_OPS/issues
+
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://www.linkedin.com/in/paniceres-lucio/
-[product-screenshot]: src/screenshot.png
 
 [Pandas-logo]: https://img.shields.io/badge/Pandas-150458?style=for-the-badge&logo=pandas&logoColor=white
 [Pandas-url]: https://pandas.pydata.org/
