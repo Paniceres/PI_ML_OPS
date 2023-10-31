@@ -25,7 +25,7 @@
     <a href="https://github.com/Paniceres/PI_ML_OPS"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/Paniceres/PI_ML_OPS">View Demo</a>
+    <a href="https://www.youtube.com/watch?v=DtV2zO1x5g8">View Demo</a>
     ·
     <a href="https://github.com/Paniceres/PI_ML_OPS/issues">Report Bug</a>
     ·
