@@ -84,7 +84,7 @@ Steam, a leading PC game distribution platform, has room for improvement in its 
 * [![PyArrow][PyArrow-logo]][PyArrow-url]
 * [![FastAPI][FastAPI-logo]][FastAPI-url]
 * [![Render][Render-logo]][Render-url]
-* [![Manjaro][Manjaro-logo][Manjaro-url]]
+* [![Manjaro][Manjaro-logo]][Manjaro-url]
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -256,6 +256,6 @@ Project Link: [https://github.com/Paniceres/PI_ML_OPS](https://github.com/Panice
 [FastAPI-url]: https://fastapi.tiangolo.com/
 [Render-logo]: https://img.shields.io/badge/Render-FF6C37?style=for-the-badge&logo=render&logoColor=white
 [Render-url]: https://render.com/
-[Manjaro-logo]: https://manjaro.org/images/logo.svg
+[Manjaro-logo]: https://img.shields.io/badge/Manjaro-35BF5C?style=for-the-badge&logo=manjaro&logoColor=white
 [Manjaro-url]: https://manjaro.org/
 =====================================================
